@@ -11,13 +11,19 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity {
 
     private ListView list;
-    String[] values = new String[] {
+    String[] values = new String[]{
             "Item 1: Android",
             "Item 2: iPhone ",
             "Item 3: Windows Phone",
             "Item 4: Custom Phone",
             "Item 5: Nokia"
     };
+    int[] resId = {R.drawable.aerithgainsborough
+            , R.drawable.barretwallace, R.drawable.caitsith
+            , R.drawable.cidhighwind, R.drawable.cloudstrife
+            , R.drawable.redxiii, R.drawable.sephiroth
+            , R.drawable.tifalockhart, R.drawable.vincentvalentine
+            , R.drawable.yuffiekisaragi, R.drawable.zackfair};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,9 +36,22 @@ public class MainActivity extends AppCompatActivity {
 //                android.R.layout.simple_list_item_1 ,
 //                android.R.id.text1 ,
 //                values);
-        CustomAdapter customAdapter = new CustomAdapter( getApplicationContext(), values  );
+        CustomAdapter customAdapter = new CustomAdapter(getApplicationContext(), values, resId);
 
         list.setAdapter(customAdapter);
+
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView,
+                                    View view,
+                                    int position, long l) {
+                String itemValue = (String) list.getItemAtPosition(position);
+                Toast.makeText(MainActivity.this,
+                        "Position :"+ position+"  ListItem : " +itemValue,
+                        Toast.LENGTH_SHORT)
+                        .show();
+            }
+        });
 
 //        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 //            @Override
@@ -46,7 +65,6 @@ public class MainActivity extends AppCompatActivity {
 //                        .show();
 //            }
 //        });
-
 
 
     }
